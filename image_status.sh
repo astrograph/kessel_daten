@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 # this script is called by motion when a new image was saved
 # it connects a specific image with a status code to debug the various status codes
 
