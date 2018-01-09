@@ -77,9 +77,9 @@ do
   elif [ "$BETRIEBSZUSTAND" == "6.0" ]; then
     BETRIEBSZUSTAND_TEXT="unknown";
   elif [ "$BETRIEBSZUSTAND" == "7.0" ]; then
-    BETRIEBSZUSTAND_TEXT="unknown";
+    BETRIEBSZUSTAND_TEXT="Vorbereitung";
   elif [ "$BETRIEBSZUSTAND" == "8.0" ]; then
-    BETRIEBSZUSTAND_TEXT="Vorwaermphase (?)";
+    BETRIEBSZUSTAND_TEXT="Vorwaermphase";
   elif [ "$BETRIEBSZUSTAND" == "9.0" ]; then
     BETRIEBSZUSTAND_TEXT="Zuenden";
   elif [ "$BETRIEBSZUSTAND" == "10.0" ]; then
@@ -87,13 +87,13 @@ do
   elif [ "$BETRIEBSZUSTAND" == "11.0" ]; then
     BETRIEBSZUSTAND_TEXT="Abst. warten 1";
   elif [ "$BETRIEBSZUSTAND" == "12.0" ]; then
-    BETRIEBSZUSTAND_TEXT="unkown";
+    BETRIEBSZUSTAND_TEXT="Abst. Einschub 1";
   elif [ "$BETRIEBSZUSTAND" == "13.0" ]; then
     BETRIEBSZUSTAND_TEXT="Abst. Warten 2";
   elif [ "$BETRIEBSZUSTAND" == "14.0" ]; then
-    BETRIEBSZUSTAND_TEXT="unknown";
+    BETRIEBSZUSTAND_TEXT="Abst. Einschub 2";
   elif [ "$BETRIEBSZUSTAND" == "15.0" ]; then
-    BETRIEBSZUSTAND_TEXT="Abreinigen (?)";
+    BETRIEBSZUSTAND_TEXT="Abreinigen";
   fi
 
   STATE_STRING="$BETRIEBSART_TEXT - $BETRIEBSZUSTAND_TEXT"
