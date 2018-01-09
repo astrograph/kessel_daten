@@ -22,6 +22,5 @@
 # m h  dom mon dow   command
 */5 * * * * /home/pi/froeling_p3100_logger/watchdog.sh >> /home/pi/froeling_p3100_logger/watchdog.log
 */5 * * * * /home/pi/froeling_p3100_logger/monitor_status_check.sh >> /home/pi/froeling_p3100_logger/crontab_check.log
-*/20 * * * *  curl -s -T /home/pi/froeling_p3100_logger/logfiles/froeling_data_`date +%Y-%m-%d`.log -u $FTP_USER:$FTP_PASSWORD $FTP_HOST < /dev/null
-59 23 * * *  curl -s -T /home/pi/froeling_p3100_logger/logfiles/froeling_data_`date +%Y-%m-%d`.log -u $FTP_USER:$FTP_PASSWORD $FTP_HOST < /dev/null
+*/2 * * * * /home/pi/froeling_p3100_logger/upload_logs.sh >> /home/pi/froeling_p3100_logger/ftp.log
 
