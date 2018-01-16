@@ -22,5 +22,5 @@
 # m h  dom mon dow   command
 */5 * * * * /home/pi/froeling_p3100_logger/watchdog.sh >> /home/pi/froeling_p3100_logger/watchdog.log
 */5 * * * * /home/pi/froeling_p3100_logger/monitor_status_check.sh >> /home/pi/froeling_p3100_logger/crontab_check.log
-*/2 * * * * /home/pi/froeling_p3100_logger/upload_logs.sh >> /home/pi/froeling_p3100_logger/ftp.log
+*/20 * * * * /home/pi/froeling_p3100_logger/upload_logs.sh >> /home/pi/froeling_p3100_logger/ftp.log
 
