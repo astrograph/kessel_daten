@@ -1,7 +1,7 @@
 #!/bin/sh
 # this script checks if the check_status.sh script is running, if not, it will restart it, and send a notification message
 if ps -ef | fgrep -v grep | fgrep check_status.sh ; then
-        echo "script is running"
+        # echo "script is running"
         exit 0
 else
         echo "script is not running - restarting"

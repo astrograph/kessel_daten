@@ -2,6 +2,7 @@
 # Skript soll kontinuierlich laufen, checkt staendig den Status
 # wird ueber ein anderes Script, das per crontab gestartet wird ueberwacht
 # sehe zeilenweise in actual_data.txt nach und loesche Leerzeichen
+# Umgebungsvariablen sind in /etc/environment gesetzt
 BETRIEBSZUSTAND="x";
 BETRIEBSART="x";
 FEHLERSTATUS="x";
@@ -107,9 +108,9 @@ if [ "$NEW_COMPOUND" != "$COMPOUND_STATUS" ]
     COMPOUND_STATUS="$NEW_COMPOUND"
       if [ "$COMPOUND_STATUS" == "11.0-7.0" ]; then
           STATE_STRING="$BETRIEBSART_TEXT - Fehler: Isoliertuer offen - Aschebox voll oder Lagerraum kontrollieren!"
-	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL_ALARM 
+	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL_ALARM
       elif [ "$COMPOUND_STATUS" == "3.0-1.0" ]; then
-	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL 
+	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
       fi
       NOW=`date "+%Y-%m-%d %H:%M:%S"`     	  
       echo "$NOW;$DATE;$TIME;$BETRIEBSART-$COMPOUND_STATUS;$STATE_STRING"
