@@ -7,6 +7,6 @@ else
         echo "script is not running - restarting"
         /home/pi/froeling_p3100_logger/check_status.sh >> /home/pi/froeling_p3100_logger/check_status.log &
         #mailing program
-        cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: check-status was not running - restarted!" $EMAIL 
+        cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: check-status was not running - restarted!" $EMAIL
         exit 0
 fi
