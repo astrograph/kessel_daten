@@ -65,18 +65,20 @@ do
     BETRIEBSART_TEXT="Ausgeschaltet";
   fi 
 
-  if [ "$BETRIEBSZUSTAND" == "1.0" ]; then
+  if [ "$BETRIEBSZUSTAND" == "0.0" ]; then
+    BETRIEBSZUSTAND_TEXT="Stoerung";
+  elif [ "$BETRIEBSZUSTAND" == "1.0" ]; then
     BETRIEBSZUSTAND_TEXT="Brenner aus";
   elif [ "$BETRIEBSZUSTAND" == "2.0" ]; then
     BETRIEBSZUSTAND_TEXT="Anheizen";
   elif [ "$BETRIEBSZUSTAND" == "3.0" ]; then
     BETRIEBSZUSTAND_TEXT="Heizen";
   elif [ "$BETRIEBSZUSTAND" == "4.0" ]; then
-    BETRIEBSZUSTAND_TEXT="unknown";
+    BETRIEBSZUSTAND_TEXT="Feuerhaltung";
   elif [ "$BETRIEBSZUSTAND" == "5.0" ]; then
-    BETRIEBSZUSTAND_TEXT="unknown";
+    BETRIEBSZUSTAND_TEXT="Feuer aus";
   elif [ "$BETRIEBSZUSTAND" == "6.0" ]; then
-    BETRIEBSZUSTAND_TEXT="unknown";
+    BETRIEBSZUSTAND_TEXT="Tuer offen";
   elif [ "$BETRIEBSZUSTAND" == "7.0" ]; then
     BETRIEBSZUSTAND_TEXT="Vorbereitung";
   elif [ "$BETRIEBSZUSTAND" == "8.0" ]; then
@@ -110,6 +112,10 @@ if [ "$NEW_COMPOUND" != "$COMPOUND_STATUS" ]
           STATE_STRING="$BETRIEBSART_TEXT - Fehler: Isoliertuer offen - Aschebox voll oder Lagerraum kontrollieren!"
 	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL_ALARM
       elif [ "$COMPOUND_STATUS" == "3.0-1.0" ]; then
+	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
+      elif [ "$BETRIEBSZUSTAND == "0.0" ]; then
+	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
+      elif [ "$BETRIEBSZUSTAND == "6.0" ]; then
 	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
       fi
       NOW=`date "+%Y-%m-%d %H:%M:%S"`     	  
