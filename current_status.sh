@@ -1,12 +1,12 @@
 #!/bin/bash
-# sehe zeilenweise in actual_data.txt nach und loesche Leerzeichen
+# look at lines in current_data.txt, remove blank character
 for ZEILE in  `cat /home/pi/froeling_p3100_logger/current_data.txt | sed s/" "/""/g`
 do  
-  # extrahiert die Messwertnummer 
+  # extract the measurement number
   NR=`echo $ZEILE | cut -d ";" -f 1`  
-  # extrahiert den Messwert und loescht ".0" am Ende
+  # extract the measturement and delete trailing ".0"
   WERT=`echo $ZEILE | cut -d ";" -f 3 | sed s/"\.0$"//g`
-  EINHEIT="&deg;C" # setze Einheit standardmaessig auf °C
+  EINHEIT="&deg;C" # use °C as standard unit
   INFO=""
     
   case $NR in 
@@ -45,6 +45,6 @@ do
       #15|16) EINHEIT="&deg;C"
   esac
   
-  # schreibe Container füuellen Messwert mit Info, Wert und Einheit
+  # write output
   echo "$INFO $WERT $EINHEIT"
 done

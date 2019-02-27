@@ -110,7 +110,7 @@ if [ "$NEW_COMPOUND" != "$COMPOUND_STATUS" ]
     COMPOUND_STATUS="$NEW_COMPOUND"
       if [ "$COMPOUND_STATUS" == "11.0-7.0" ]; then
           STATE_STRING="$BETRIEBSART_TEXT - Fehler: Isoliertuer offen - Aschebox voll oder Lagerraum kontrollieren!"
-	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL_ALARM
+	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -a "X-Priority:1" -s "ACHTUNG FEHLER! WOHNRAUM - Heizung: $STATE_STRING" $EMAIL_ALARM
       elif [ "$COMPOUND_STATUS" == "3.0-1.0" ]; then
 	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
       elif [ "$BETRIEBSZUSTAND == "0.0" ]; then
