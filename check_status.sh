@@ -1,7 +1,7 @@
 #!/bin/bash
 # Skript soll kontinuierlich laufen, checkt staendig den Status
 # wird ueber ein anderes Script, das per crontab gestartet wird ueberwacht
-# sehe zeilenweise in actual_data.txt nach und loesche Leerzeichen
+# sehe zeilenweise in current_data.txt nach und loesche Leerzeichen
 # Umgebungsvariablen sind in /etc/environment gesetzt
 BETRIEBSZUSTAND="x";
 BETRIEBSART="x";
@@ -108,21 +108,25 @@ if [ "$NEW_COMPOUND" != "$COMPOUND_STATUS" ]
   then
     # new state -> do something!
     COMPOUND_STATUS="$NEW_COMPOUND"
-      if [ "$COMPOUND_STATUS" == "11.0-7.0" ]; then
+    if [ "$COMPOUND_STATUS" == "11.0-7.0" ]; then
           STATE_STRING="$BETRIEBSART_TEXT - Fehler: Isoliertuer offen - Aschebox voll oder Lagerraum kontrollieren!"
-	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -a "X-Priority:1" -s "ACHTUNG FEHLER! WOHNRAUM - Heizung: $STATE_STRING" $EMAIL_ALARM
-      elif [ "$COMPOUND_STATUS" == "3.0-1.0" ]; then
-	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
-      elif [ "$BETRIEBSZUSTAND == "0.0" ]; then
-	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
-      elif [ "$BETRIEBSZUSTAND == "6.0" ]; then
-	  cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
-      fi
+	        cat /home/pi/froeling_p3100_logger/current_data.txt | mail -a "X-Priority:1" -s "ACHTUNG FEHLER! WOHNRAUM - Heizung: $STATE_STRING" $EMAIL_ALARM
+    elif [ "$COMPOUND_STATUS" == "0.0-7.0" ]; then
+	        STATE_STRING="$BETRIEBSART_TEXT - Fehler: STB Sicherheits Temperatur Begrenzung!"
+	        cat /home/pi/froeling_p3100_logger/current_data.txt | mail -a "X-Priority:1" -s "ACHTUNG FEHLER! WOHNRAUM - Heizung: $STATE_STRING" $EMAIL_ALARM
+    elif [ "$COMPOUND_STATUS" == "3.0-1.0" ]; then
+	        cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
+    elif [ "$BETRIEBSZUSTAND == "0.0" ]; then
+	        cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
+    elif [ "$BETRIEBSZUSTAND == "6.0" ]; then
+	        cat /home/pi/froeling_p3100_logger/current_data.txt | mail -s "WOHNRAUM - Heizung: $STATE_STRING" $EMAIL
+    fi
       NOW=`date "+%Y-%m-%d %H:%M:%S"`     	  
       echo "$NOW;$DATE;$TIME;$BETRIEBSART-$COMPOUND_STATUS;$STATE_STRING"
   fi
   sleep 2;
 done
 #
+
 
 
